@@ -1,0 +1,44 @@
+name: Python Pipelines Demo
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Unit Tests
+    steps:
+    - uses: actions/checkout@v4
+    - uses: pypa/hatch@install
+    - run: hatch test --cover
+
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint
+    steps:
+    - uses: actions/checkout@v4
+    - uses: pypa/hatch@install
+    - run: hatch fmt --linter --check
+
+  format:
+    runs-on: ubuntu-latest
+    name: Format Check
+    steps:
+    - uses: actions/checkout@v4
+    - uses: pypa/hatch@install
+    - run: hatch fmt --formatter --check
+
+  typecheck:
+    runs-on: ubuntu-latest
+    name: Type Check
+    steps:
+    - uses: actions/checkout@v4
+    - uses: pypa/hatch@install
+    - run: hatch run types:check
+
+  apidocs:
+    runs-on: ubuntu-latest
+    name: Publish API Docs
+    steps:
+    - uses: actions/checkout@v4
+    - uses: pypa/hatch@install
+    - run: |
+        hatch run docs:mkdocs build
+        hatch run docs:mkdocs gh-deploy --strict --force

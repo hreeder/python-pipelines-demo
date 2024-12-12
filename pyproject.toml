@@ -1,0 +1,72 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "python-pipelines-demo"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Harry Reeder", email = "harry@harryreeder.co.uk" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/hreeder/python-pipelines-demo#readme"
+Issues = "https://github.com/hreeder/python-pipelines-demo/issues"
+Source = "https://github.com/hreeder/python-pipelines-demo"
+
+[tool.hatch.version]
+path = "src/python_pipelines_demo/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/python_pipelines_demo tests}"
+
+[tool.hatch.envs.docs]
+extra-dependencies = [
+  "mkdocs",
+  "mkdocs-material",
+  "mkdocs-gen-files",
+  "mkdocstrings[python]",
+]
+
+# [tool.hatch.envs.docs.scripts]
+# mkdocs = "mkdocs"
+
+[tool.coverage.run]
+source_pkgs = ["demo", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/python_pipelines_demo/__about__.py",
+]
+
+[tool.coverage.paths]
+demo = ["src/python_pipelines_demo", "*/demo/src/python_pipelines_demo"]
+tests = ["tests", "*/demo/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
