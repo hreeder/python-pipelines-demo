@@ -76,3 +76,25 @@ addopts = [
     "--import-mode=importlib",
     "--showlocals",
 ]
+
+[tool.ruff]
+include = ["pyproject.toml", "src/**/*.py"]
+
+[tool.ruff.lint]
+select = [
+    # # pycodestyle
+    # "E",
+    # Pyflakes
+    "F",
+    # # pyupgrade
+    # "UP",
+    # flake8-bugbear
+    "B",
+    # # flake8-simplify
+    # "SIM",
+    # isort
+    "I",
+    # pep8-naming
+    "N",
+    "S", #bandit rules (security)
+]
