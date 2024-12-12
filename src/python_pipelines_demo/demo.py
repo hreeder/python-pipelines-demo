@@ -1,4 +1,4 @@
-def decorate_christmas_tree(color):
+def decorate_christmas_tree(color: str):
     """Decorates the christmas tree
 
     Args:
