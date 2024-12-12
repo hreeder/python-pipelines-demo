@@ -1,3 +1,6 @@
+import collections
+
+
 def decorate_christmas_tree(color: str):
     """Decorates the christmas tree
 
